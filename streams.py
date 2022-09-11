@@ -1,6 +1,5 @@
 from datetime import datetime, timezone
 from os import makedirs
-from telnetlib import TLS
 
 from dotenv import dotenv_values
 from requests import get
