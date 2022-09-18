@@ -6,7 +6,7 @@ from sys import argv
 from dotenv import dotenv_values
 from requests import get
 
-from kukudy.utils import get_ts
+from utils import get_ts
 
 config = dotenv_values("../.env")
 
@@ -49,7 +49,7 @@ def log_streams(ts, rtt, headers, data):
         dump(data, f, separators=(',', ':'))
 
 
-def update_streams(num_page):
+def update_streams(num_page=1):
     cursor = ''
 
     for _ in range(num_page):
@@ -61,6 +61,8 @@ def update_streams(num_page):
 
 
 if __name__ == '__main__':
-    num_page = ceil(int(argv[1])/100)
-    if num_page > 0:
+    if len(argv) != 2:
+        update_streams()
+    else:
+        num_page = ceil(int(argv[1])/100)
         update_streams(num_page)
